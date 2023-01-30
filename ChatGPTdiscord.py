@@ -95,7 +95,7 @@ if __name__ == "__main__":
         if message.content == 'restart' and message.author.id == config['discord_admin_id']: os.execl(__file__, *sys.argv);return
         if message.content == 'reset' and message.author.id == config['discord_admin_id']: chatbot.reset_chat;await message.add_reaction("💪"); print("reset chat"); return
         if not message.content.startswith('!c '):return
-        message = message[3:]
+        message.content = message.content[3:]
         longquery=''
         if message.content.startswith('!hive '):
             authperm=message.content[6:]
