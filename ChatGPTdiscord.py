@@ -89,7 +89,6 @@ if __name__ == "__main__":
     @client.event
     async def on_message(message):
         if message.author == client.user: return
-        if message.channel.id != config["discord_channel"] and type(message.channel)!=discord.DMChannel: return
         if message.author.bot: return
         if message.content == 'refresh' and message.author.id == config['discord_admin_id']: chatbot.refresh_session(); await message.add_reaction("🔄"); print("refresh session"); return
         if message.content == 'restart' and message.author.id == config['discord_admin_id']: os.execl(__file__, *sys.argv);return
