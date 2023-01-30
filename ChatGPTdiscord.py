@@ -53,7 +53,7 @@ def tidy_response(i):# Optionally spoilerify or hide the most repetitive annoyin
         if spoiler_bad_responses and bad_responses_string != '':i+='\n||'+bad_responses_string+'||'
     if rebrand_responses:
         i=i.replace("OpenAI", "EvilCorp")
-        i=i.replace("!Dream:", "!dream ")
+        i=i.replace("!C:", "!c ")
     return i
 
 def to_thread(func: typing.Callable) -> typing.Coroutine:
@@ -94,7 +94,8 @@ if __name__ == "__main__":
         if message.content == 'refresh' and message.author.id == config['discord_admin_id']: chatbot.refresh_session(); await message.add_reaction("🔄"); print("refresh session"); return
         if message.content == 'restart' and message.author.id == config['discord_admin_id']: os.execl(__file__, *sys.argv);return
         if message.content == 'reset' and message.author.id == config['discord_admin_id']: chatbot.reset_chat;await message.add_reaction("💪"); print("reset chat"); return
-        if message.content.startswith('!dream'):return
+        if not message.content.startswith('!c '):return
+        message = message[3:]
         longquery=''
         if message.content.startswith('!hive '):
             authperm=message.content[6:]
